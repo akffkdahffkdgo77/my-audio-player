@@ -54,10 +54,13 @@ export default function Home() {
         }
     };
 
+    // TODO: Display에서 소리를 조절할 수 있는 기능 추가하기
+
     return (
         <main className="w-full min-h-screen flex justify-center items-center flex-col gap-2.5">
-            <label htmlFor="file">
-                <input type="file" accept="audio/*" onChange={onChange} />
+            <label htmlFor="file" className="w-[300px]">
+                <p className="cursor-pointer ml-auto text-white w-fit bg-black text-[12px] font-bold p-2.5 rounded-md">파일 업로드</p>
+                <input id="file" className="hidden" type="file" accept="audio/*" onChange={onChange} />
             </label>
             <div className="w-[300px] h-[500px] bg-black rounded-md p-5">
                 <div className="w-full h-[150px] bg-blue-50 rounded-md border-2 border-black">{current && current?.name}</div>
