@@ -1,12 +1,11 @@
-# react typescript template
+# My Audio Player
 
 ## Installed Packages
 
--   react v18
--   react-query v4
+-   React v18 + TypeScript
 -   react-router-dom v6
+-   @heroicons/react
 -   tailwindcss
--   typescript
 
 ## Code Convention
 

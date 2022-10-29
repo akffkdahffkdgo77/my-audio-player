@@ -1,10 +1,8 @@
 {
-    "name": "react-ts-template",
+    "name": "my-audio-player",
     "version": "1.0.0",
     "dependencies": {
         "@heroicons/react": "^2.0.12",
-        "@tanstack/react-query": "^4.3.1",
-        "@tanstack/react-query-devtools": "^4.3.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.3.0",
