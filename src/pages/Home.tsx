@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable jsx-a11y/media-has-caption */
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import { PlayIcon, PauseIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/solid';
 
@@ -9,11 +9,21 @@ export default function Home() {
     const [files, setFiles] = useState<string[]>([]);
     const [current, setCurrent] = useState<File | null>(null);
     const [mode, setMode] = useState('stop');
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
     const currentTime = useRef<number>(0);
     const volumeRef = useRef<HTMLInputElement | null>(null);
     const [volume, setVolume] = useState(0.5);
     const [volumeHeight, setVolumeHeight] = useState('50%');
+
+    useEffect(() => {
+        let timerId: NodeJS.Timeout;
+        if (show) {
+            timerId = setTimeout(() => {
+                setShow(false);
+            }, 5000);
+        }
+        return () => clearTimeout(timerId);
+    }, [show]);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -62,6 +72,7 @@ export default function Home() {
 
     const onVolumeUp = () => {
         if (audio.current) {
+            setShow(true);
             audio.current.load();
             const newVolume = volume === 100 ? volume : volume + 0.1;
             audio.current.volume = newVolume;
@@ -73,6 +84,7 @@ export default function Home() {
 
     const onVolumeDown = () => {
         if (audio.current) {
+            setShow(true);
             audio.current.load();
             const newVolume = volume === 0 ? volume : volume - 0.1;
             audio.current.volume = newVolume;
@@ -81,8 +93,6 @@ export default function Home() {
             setVolumeHeight(`calc(100% - ${Math.floor(newVolume * 100)}%)`);
         }
     };
-
-    // TODO : When Music playing, show sound effect animation
 
     return (
         <main className="w-full min-h-screen flex justify-center items-center flex-col gap-2.5">
