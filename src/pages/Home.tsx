@@ -10,7 +10,7 @@ export default function Home() {
     const [current, setCurrent] = useState<File | null>(null);
     const [mode, setMode] = useState('stop');
     const [show, setShow] = useState(false);
-    const currentTime = useRef<number>(0);
+    const [currentTime, setCurrentTime] = useState(0);
     const volumeRef = useRef<HTMLInputElement | null>(null);
     const [volume, setVolume] = useState(0.5);
     const [volumeHeight, setVolumeHeight] = useState('50%');
@@ -48,7 +48,7 @@ export default function Home() {
                     break;
                 case 'pause':
                     setMode('play');
-                    audio.current.currentTime = currentTime.current;
+                    audio.current.currentTime = currentTime;
                     audio.current.play();
                     break;
                 case 'play':
@@ -64,7 +64,7 @@ export default function Home() {
     const onTimeUpdate = (e: React.SyntheticEvent<EventTarget>) => {
         const event = e.currentTarget as HTMLAudioElement;
         if (!audio.current?.paused && !audio.current?.ended) {
-            currentTime.current = event.currentTime;
+            setCurrentTime(event.currentTime);
         }
     };
 
@@ -94,6 +94,12 @@ export default function Home() {
         }
     };
 
+    // TODO
+    // Audio Play Time
+    // Current Duration, Total Duration
+    // Add Multi Files
+    // Show Files List && able to select them
+
     return (
         <main className="w-full min-h-screen flex justify-center items-center flex-col gap-2.5">
             <label htmlFor="file" className="w-[300px]">
@@ -106,7 +112,14 @@ export default function Home() {
                     <button className="w-[5px] h-[30px] bg-black" aria-label="volume down" title="volume down" type="button" onClick={onVolumeDown} />
                 </div>
                 <div className="overflow-hidden w-full h-[150px] bg-blue-50 rounded-md border-2 p-2.5 border-black" role="button" tabIndex={-1} onKeyDown={onScreenClick} onClick={onScreenClick}>
-                    <p className="text-[12px] font-semibold font-mono">{current && current?.name}</p>
+                    <p className="text-[12px] font-semibold font-mono">{current?.name}</p>
+                    {current?.name && (
+                        <div className="track">
+                            <input type="range" />
+                            <span>{`${currentTime / 100}`.slice(0, 4) || '0:00'}</span>&nbsp;/&nbsp;
+                            <span>{audio.current?.duration && parseFloat(`${audio.current.duration / 60}`)}</span>
+                        </div>
+                    )}
                 </div>
                 {show && (
                     <label htmlFor="volume" className="overflow-hidden w-[20px] h-[100px] absolute top-[45px] right-[30px] bottom-[45px] bg-blue-50">
