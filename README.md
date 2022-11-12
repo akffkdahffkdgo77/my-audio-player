@@ -20,5 +20,3 @@
 
 -   ESLint - Airbnb
 -   Prettier
-
-## 프로젝트 목표

@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable jsx-a11y/media-has-caption */
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 import { PlayIcon, PauseIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/solid';
 
 export default function Home() {
     const audio = useRef<HTMLAudioElement | null>(null);
-    const [files, setFiles] = useState<string[]>([]);
     const [current, setCurrent] = useState<File | null>(null);
     const [mode, setMode] = useState('stop');
     const [show, setShow] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0);
+
+    const [currentTime, setCurrentTime] = useState('0:00');
+    const durationRef = useRef<HTMLInputElement | null>(null);
+    const totalDuration = useRef<string>('0:00');
+
     const volumeRef = useRef<HTMLInputElement | null>(null);
     const [volume, setVolume] = useState(0.5);
     const [volumeHeight, setVolumeHeight] = useState('50%');
@@ -29,10 +32,12 @@ export default function Home() {
         const file = e.target.files?.[0];
         if (file) {
             const url: string = URL.createObjectURL(file);
-            setFiles((prev) => [...prev, url]);
             setCurrent(file);
             if (audio.current) {
                 audio.current.src = url;
+                audio.current.load();
+                audio.current.play();
+                setMode('play');
             }
         }
     };
@@ -40,7 +45,6 @@ export default function Home() {
     const onPlay = () => {
         if (audio.current) {
             audio.current.load();
-
             switch (mode) {
                 case 'stop':
                     setMode('play');
@@ -48,7 +52,7 @@ export default function Home() {
                     break;
                 case 'pause':
                     setMode('play');
-                    audio.current.currentTime = currentTime;
+                    audio.current.currentTime = Number(currentTime);
                     audio.current.play();
                     break;
                 case 'play':
@@ -63,8 +67,14 @@ export default function Home() {
 
     const onTimeUpdate = (e: React.SyntheticEvent<EventTarget>) => {
         const event = e.currentTarget as HTMLAudioElement;
-        if (!audio.current?.paused && !audio.current?.ended) {
-            setCurrentTime(event.currentTime);
+        if (audio.current && !audio.current.paused && !audio.current.ended) {
+            totalDuration.current = `${Math.floor(audio.current.duration / 60)}.${Math.floor(audio.current.duration % 60)}`;
+
+            const minutes = Math.floor(event.currentTime / 60);
+            const seconds = Math.floor(event.currentTime % 60) < 10 ? `0${Math.floor(event.currentTime % 60)}` : `${Math.floor(event.currentTime % 60)}`;
+
+            setCurrentTime(`${minutes}:${seconds}`);
+            durationRef.current!.defaultValue = `${minutes}.${seconds}`;
         }
     };
 
@@ -94,12 +104,6 @@ export default function Home() {
         }
     };
 
-    // TODO
-    // Audio Play Time
-    // Current Duration, Total Duration
-    // Add Multi Files
-    // Show Files List && able to select them
-
     return (
         <main className="w-full min-h-screen flex justify-center items-center flex-col gap-2.5">
             <label htmlFor="file" className="w-[300px]">
@@ -111,13 +115,18 @@ export default function Home() {
                     <button className="w-[5px] h-[30px] bg-black" aria-label="volume up" title="volume up" type="button" onClick={onVolumeUp} />
                     <button className="w-[5px] h-[30px] bg-black" aria-label="volume down" title="volume down" type="button" onClick={onVolumeDown} />
                 </div>
-                <div className="overflow-hidden w-full h-[150px] bg-blue-50 rounded-md border-2 p-2.5 border-black" role="button" tabIndex={-1} onKeyDown={onScreenClick} onClick={onScreenClick}>
-                    <p className="text-[12px] font-semibold font-mono">{current?.name}</p>
+                <div className="overflow-hidden relative w-full h-[150px] bg-blue-50 rounded-md border-2 p-2.5 border-black">
+                    <div className="h-full" role="button" tabIndex={-1} onKeyDown={onScreenClick} onClick={onScreenClick}>
+                        <p className="text-[12px] font-semibold font-mono">{current?.name}</p>
+                    </div>
                     {current?.name && (
-                        <div className="track">
-                            <input type="range" />
-                            <span>{`${currentTime / 100}`.slice(0, 4) || '0:00'}</span>&nbsp;/&nbsp;
-                            <span>{audio.current?.duration && parseFloat(`${audio.current.duration / 60}`)}</span>
+                        <div className="controls absolute bottom-2.5 flex justify-start items-center gap-[5px] w-[calc(100%_-_20px)]">
+                            <input ref={durationRef} className="w-full appearance-none" type="range" step={0.01} max={totalDuration.current} />
+                            <div className="flex items-center gap-[2px]">
+                                <span className="text-[12px]">{currentTime || '0:00'}</span>
+                                <span className="text-[10px] text-gray-700">/</span>
+                                <span className="text-[12px]">{totalDuration.current?.replace(/\./, ':') || '0:00'}</span>
+                            </div>
                         </div>
                     )}
                 </div>
