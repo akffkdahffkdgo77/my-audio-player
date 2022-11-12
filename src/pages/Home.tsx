@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable jsx-a11y/media-has-caption */
-import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import { PlayIcon, PauseIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/solid';
 
@@ -103,6 +103,8 @@ export default function Home() {
             setVolumeHeight(`calc(100% - ${Math.floor(newVolume * 100)}%)`);
         }
     };
+
+    // TODO: onChange 추가하기
 
     return (
         <main className="w-full min-h-screen flex justify-center items-center flex-col gap-2.5">
