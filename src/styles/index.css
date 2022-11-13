@@ -21,7 +21,31 @@
 
 .controls input[type='range']:focus::-webkit-slider-runnable-track {
     border: none;
+    outline: none;
+}
+
+.controls input[type='range']::-moz-range-track {
+    width: 100px;
+    height: 15px;
     background: #000000;
+    border: none;
+}
+
+.controls input[type='range']::-moz-range-thumb {
+    border: none;
+    height: 20px;
+    width: 5px;
+    border-radius: 0;
+    background: #eef6ff;
+}
+
+/*hide the outline behind the border*/
+.controls input[type='range']:-moz-focusring {
+    outline: none;
+}
+
+.controls input[type='range']:focus::-moz-range-track {
+    outline: none;
 }
 
 label > input[type='range']::-webkit-slider-runnable-track {
