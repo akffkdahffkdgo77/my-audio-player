@@ -1,6 +1,5 @@
-interface IVolumeControls {
-    onVolumeChange: (direction: string) => void;
-}
+import { IVolumeControls } from 'components/VolumeControls/types';
+
 export default function VolumeControls({ onVolumeChange }: IVolumeControls) {
     return (
         <div className="absolute -right-[5px] flex flex-col gap-[0.5px]">

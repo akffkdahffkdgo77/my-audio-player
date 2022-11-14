@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FormEvent, useEffect, useRef, useState } from 'react';
 
+import { IAudioPlayer } from 'components/AudioPlayer/types';
 import ControlButtons from 'components/ControlButtons';
 import Duration from 'components/Duration';
 import Volume from 'components/Volume';
 import VolumeControls from 'components/VolumeControls';
-
-interface IAudioPlayer {
-    uploadedFile: File | null;
-}
 
 export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
     const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -42,7 +39,6 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
                 const url: string = URL.createObjectURL(uploadedFile as File);
                 audioRef.current.src = url;
             }
-
             audioRef.current.load();
 
             switch (mode) {

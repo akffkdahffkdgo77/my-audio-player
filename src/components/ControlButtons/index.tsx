@@ -1,12 +1,9 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import { forwardRef, SyntheticEvent } from 'react';
+import { forwardRef } from 'react';
 
 import { PlayIcon, PauseIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/solid';
 
-type PropsType = {
-    onPlay: () => void;
-    onTimeUpdate: (e: SyntheticEvent<EventTarget>) => void;
-};
+import { PropsType } from 'components/ControlButtons/types';
 
 const ControlButtons = forwardRef<HTMLAudioElement, PropsType>(({ onPlay, onTimeUpdate }, ref) => {
     return (
@@ -32,6 +29,7 @@ const ControlButtons = forwardRef<HTMLAudioElement, PropsType>(({ onPlay, onTime
         </div>
     );
 });
+
 ControlButtons.displayName = 'ControlButtons';
 
 export default ControlButtons;

@@ -1,11 +1,8 @@
 import { forwardRef } from 'react';
 
-type Propstype = {
-    volume: number;
-    volumeHeight: string;
-};
+import { PropsType } from 'components/Volume/types';
 
-const Volume = forwardRef<HTMLInputElement, Propstype>(({ volumeHeight, volume }, ref) => {
+const Volume = forwardRef<HTMLInputElement, PropsType>(({ volumeHeight, volume }, ref) => {
     return (
         <label htmlFor="volume" className="overflow-hidden w-[20px] h-[100px] absolute top-[45px] right-[30px] bottom-[45px] bg-blue-50">
             <div style={{ height: volumeHeight }} className="z-50 h-0 w-[17px] bg-blue-50 absolute top-[-1px] right-0" />

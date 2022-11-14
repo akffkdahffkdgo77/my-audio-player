@@ -1,11 +1,6 @@
-import { FormEvent, forwardRef } from 'react';
+import { forwardRef } from 'react';
 
-type PropsType = {
-    currentTime: string;
-    duration: number;
-    totalDuration: string;
-    onTimeChange: (e: FormEvent<HTMLInputElement>) => void;
-};
+import { PropsType } from 'components/Duration/types';
 
 const Duration = forwardRef<HTMLInputElement, PropsType>(({ currentTime, totalDuration, duration, onTimeChange, ...rest }, ref) => {
     return (

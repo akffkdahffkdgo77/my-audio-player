@@ -1,8 +1,4 @@
-import { ChangeEvent } from 'react';
-
-interface IUploadButton {
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}
+import { IUploadButton } from 'components/UploadButton/types';
 
 export default function UploadButton({ onChange }: IUploadButton) {
     return (
