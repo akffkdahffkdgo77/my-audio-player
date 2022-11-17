@@ -9,6 +9,12 @@
 -   File Upload
 -   Music Player
 
+# v1.0.1
+
+-   Multi Files
+-   Menu
+    -   Show Music Info
+
 ## Installed Packages
 
 -   React v18 + TypeScript
