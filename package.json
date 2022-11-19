@@ -1,6 +1,7 @@
 {
     "name": "my-audio-player",
     "version": "1.0.0",
+    "license": "MIT",
     "dependencies": {
         "@heroicons/react": "^2.0.12",
         "react": "^18.2.0",

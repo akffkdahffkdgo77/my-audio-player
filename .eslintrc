@@ -92,6 +92,7 @@
         "no-unneeded-ternary": "off",
         "react/no-array-index-key": "off",
         "prefer-promise-reject-errors": "off",
-        "global-require": "off"
+        "global-require": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
     }
 }
