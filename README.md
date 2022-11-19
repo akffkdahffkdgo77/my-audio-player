@@ -1,13 +1,18 @@
 # My Audio Player
 
-## 목표
+## Weekly Clone Coding
 
-아이팟 클론 코딩
+Part 5 of [Weekly Clone Coding Challenge](https://github.com/namiein/weekly-clone-coding)
 
-## v1.0.0
+## Project Description
+
+Clone Coding MP3 Player
+
+## v1.0.0 (2022.10.24 ~ 2022.11.03, 2022.11.12 ~ 2022.11.20)
 
 -   File Upload
 -   Music Player
+    -   Currently Support 1 Music
 
 # v1.0.1
 
