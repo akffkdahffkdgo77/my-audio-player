@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FormEvent, useEffect, useRef, useState } from 'react';
 
 import { IAudioPlayer } from 'components/AudioPlayer/types';
@@ -15,8 +14,10 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
     const [mode, setMode] = useState('stop');
     const [show, setShow] = useState(false);
 
+    const [max, setMax] = useState(0);
     const [originalTime, setOriginalTime] = useState(0);
     const [currentTime, setCurrentTime] = useState('0:00');
+    const [totalDuration, setTotalDuration] = useState('0:00');
 
     const [volume, setVolume] = useState(0.5);
 
@@ -39,20 +40,18 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
             audioRef.current.load();
 
             switch (mode) {
-                case 'stop':
-                    setMode('play');
-                    audioRef.current.play();
+                case 'play':
+                    setMode('pause');
+                    audioRef.current.pause();
                     break;
                 case 'pause':
                     setMode('play');
                     audioRef.current.currentTime = originalTime;
                     audioRef.current.play();
                     break;
-                case 'play':
-                    setMode('pause');
-                    audioRef.current.pause();
-                    break;
                 default:
+                    setMode('play');
+                    audioRef.current.play();
                     break;
             }
         }
@@ -61,8 +60,12 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
     const onTimeUpdate = (e: React.SyntheticEvent<EventTarget>) => {
         const event = e.currentTarget as HTMLAudioElement;
         if (audioRef.current && !audioRef.current.paused && !audioRef.current.ended) {
-            setOriginalTime(event.currentTime);
+            if (audioRef.current.duration && totalDuration === '0:00') {
+                setMax(audioRef.current.duration);
+                setTotalDuration(`${Math.floor(audioRef.current.duration / 60)}.${Math.floor(audioRef.current.duration % 60)}`);
+            }
 
+            setOriginalTime(event.currentTime);
             const minutes = Math.floor(event.currentTime / 60);
             const seconds = Math.floor(event.currentTime % 60) < 10 ? `0${Math.floor(event.currentTime % 60)}` : `${Math.floor(event.currentTime % 60)}`;
             setCurrentTime(`${minutes}:${seconds}`);
@@ -120,8 +123,6 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
         audioRef.current!.play();
     };
 
-    const totalDuration = audioRef.current ? `${Math.floor(audioRef.current.duration / 60)}.${Math.floor(audioRef.current.duration % 60)}` : '0:00';
-
     return (
         <div className="relative w-[300px] h-[500px] bg-black rounded-md p-5">
             <VolumeControls onVolumeChange={onVolumeChange} />
@@ -130,14 +131,7 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
                     <p className="text-[12px] font-semibold font-mono">{uploadedFile?.name}</p>
                 </div>
                 {uploadedFile?.name && !!originalTime && (
-                    <Duration
-                        ref={durationRef}
-                        currentTime={currentTime}
-                        max={audioRef.current?.duration.toFixed(2) || 0}
-                        totalDuration={totalDuration}
-                        duration={originalTime}
-                        onTimeChange={onTimeChange}
-                    />
+                    <Duration ref={durationRef} currentTime={currentTime} max={max} totalDuration={totalDuration} duration={originalTime} onTimeChange={onTimeChange} />
                 )}
             </div>
             {show && <Volume ref={volumeRef} volume={volume} />}
