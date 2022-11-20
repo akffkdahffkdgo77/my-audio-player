@@ -8,7 +8,7 @@ Part 5 of [Weekly Clone Coding Challenge](https://github.com/namiein/weekly-clon
 
 Clone Coding MP3 Player
 
-## v1.0.0 (2022.10.24 ~ 2022.11.03, 2022.11.12 ~ 2022.11.20)
+## v1.0.0 (2022.10.24 ~ 2022.11.20)
 
 -   File Upload
 -   Music Player
@@ -31,3 +31,49 @@ Clone Coding MP3 Player
 
 -   ESLint - Airbnb
 -   Prettier
+
+## Folder Structure
+```
+.
+├── README.md
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── public
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── app
+│   │   └── App.tsx
+│   ├── components
+│   │   ├── AudioPlayer
+│   │   │   ├── index.tsx
+│   │   │   └── types.ts
+│   │   ├── ControlButtons
+│   │   │   ├── index.tsx
+│   │   │   └── types.ts
+│   │   ├── Duration
+│   │   │   ├── index.tsx
+│   │   │   └── types.ts
+│   │   ├── UploadButton
+│   │   │   ├── index.tsx
+│   │   │   └── types.ts
+│   │   ├── Volume
+│   │   │   ├── index.tsx
+│   │   │   └── types.ts
+│   │   └── VolumeControls
+│   │       ├── index.tsx
+│   │       └── types.ts
+│   ├── index.tsx
+│   ├── pages
+│   │   └── Home
+│   │       └── index.tsx
+│   ├── react-app-env.d.ts
+│   ├── routes
+│   │   └── index.tsx
+│   └── styles
+│       └── index.css
+├── tailwind.config.js
+└── tsconfig.json
+```
