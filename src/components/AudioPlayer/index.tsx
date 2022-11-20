@@ -6,6 +6,7 @@ import Duration from 'components/Duration';
 import Volume from 'components/Volume';
 import VolumeControls from 'components/VolumeControls';
 
+// TODO: Code Refactoring
 export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const volumeRef = useRef<HTMLInputElement | null>(null);
@@ -57,6 +58,7 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
         }
     };
 
+    // TODO: time formatter 함수 작성
     const onTimeUpdate = (e: React.SyntheticEvent<EventTarget>) => {
         const event = e.currentTarget as HTMLAudioElement;
         if (audioRef.current && !audioRef.current.paused && !audioRef.current.ended) {
@@ -69,23 +71,26 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
             const minutes = Math.floor(event.currentTime / 60);
             const seconds = Math.floor(event.currentTime % 60) < 10 ? `0${Math.floor(event.currentTime % 60)}` : `${Math.floor(event.currentTime % 60)}`;
             setCurrentTime(`${minutes}:${seconds}`);
+        } else if (audioRef.current?.ended) {
+            setMode('stop');
         }
     };
 
     const onVolumeChange = (direction: string) => {
-        if (audioRef.current) {
-            setShow(true);
-            audioRef.current.load();
+        setShow(true);
+        if (audioRef.current && volumeRef.current) {
+            audioRef.current!.pause();
 
             let newVolume = 0;
             if (direction === 'up') {
-                newVolume = volume === 100 ? volume : volume + 0.1;
+                newVolume = volume.toFixed(1) === '1.0' ? 1 : volume + 0.1;
             } else {
-                newVolume = volume === 0 ? volume : volume - 0.1;
+                newVolume = volume.toFixed(1) <= '0.0' ? 0 : volume - 0.1;
             }
-
             audioRef.current.volume = newVolume;
-            volumeRef.current!.value = String(newVolume);
+            audioRef.current.play();
+
+            volumeRef.current.value = String(newVolume);
             setVolume(newVolume);
         }
     };
