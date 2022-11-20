@@ -1,5 +1,9 @@
 # My Audio Player
 
+<p align="center">
+<img width="353" alt="스크린샷 2022-11-20 오후 5 12 38" src="https://user-images.githubusercontent.com/52883505/202893454-c13555f2-03d8-4845-9034-09b3b826836b.png">
+</p>
+
 ## Weekly Clone Coding
 
 Part 5 of [Weekly Clone Coding Challenge](https://github.com/namiein/weekly-clone-coding)
