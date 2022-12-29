@@ -37,47 +37,37 @@ Clone Coding MP3 Player
 -   Prettier
 
 ## Folder Structure
+
 ```
 .
-├── README.md
-├── package-lock.json
-├── package.json
-├── postcss.config.js
-├── public
-│   ├── index.html
-│   ├── manifest.json
-│   └── robots.txt
-├── src
-│   ├── app
-│   │   └── App.tsx
-│   ├── components
-│   │   ├── AudioPlayer
-│   │   │   ├── index.tsx
-│   │   │   └── types.ts
-│   │   ├── ControlButtons
-│   │   │   ├── index.tsx
-│   │   │   └── types.ts
-│   │   ├── Duration
-│   │   │   ├── index.tsx
-│   │   │   └── types.ts
-│   │   ├── UploadButton
-│   │   │   ├── index.tsx
-│   │   │   └── types.ts
-│   │   ├── Volume
-│   │   │   ├── index.tsx
-│   │   │   └── types.ts
-│   │   └── VolumeControls
-│   │       ├── index.tsx
-│   │       └── types.ts
-│   ├── index.tsx
-│   ├── pages
-│   │   └── Home
-│   │       └── index.tsx
-│   ├── react-app-env.d.ts
-│   ├── routes
-│   │   └── index.tsx
-│   └── styles
-│       └── index.css
-├── tailwind.config.js
-└── tsconfig.json
+├── app
+│   └── App.tsx
+├── components
+│   ├── AudioPlayer
+│   │   ├── index.tsx
+│   │   └── types.ts
+│   ├── ControlButtons
+│   │   ├── index.tsx
+│   │   └── types.ts
+│   ├── Duration
+│   │   ├── index.tsx
+│   │   └── types.ts
+│   ├── UploadButton
+│   │   ├── index.tsx
+│   │   └── types.ts
+│   ├── Volume
+│   │   ├── index.tsx
+│   │   └── types.ts
+│   └── VolumeControls
+│       ├── index.tsx
+│       └── types.ts
+├── index.tsx
+├── pages
+│   └── Home
+│       └── index.tsx
+├── react-app-env.d.ts
+├── routes
+│   └── index.tsx
+└── styles
+    └── index.css
 ```
