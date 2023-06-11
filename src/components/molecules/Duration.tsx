@@ -1,8 +1,14 @@
-import { forwardRef } from 'react';
+import React from 'react';
 
-import { PropsType } from 'components/Duration/types';
+type DurationType = {
+    currentTime: string;
+    max: number | string;
+    duration: number;
+    totalDuration: string;
+    onTimeChange: (e: React.FormEvent<HTMLInputElement>) => void;
+};
 
-const Duration = forwardRef<HTMLInputElement, PropsType>(({ totalDuration, max, currentTime, duration, onTimeChange, ...rest }, ref) => {
+const Duration = React.forwardRef<HTMLInputElement, DurationType>(({ totalDuration, max, currentTime, duration, onTimeChange, ...rest }, ref) => {
     return (
         <div className="controls absolute bottom-2.5 flex justify-start items-center gap-[5px] w-[calc(100%_-_20px)]">
             <input {...rest} ref={ref} className="w-full appearance-none" type="range" step={1.0} min={0.0} max={max} value={duration} onChange={onTimeChange} />

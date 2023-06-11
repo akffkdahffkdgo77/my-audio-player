@@ -1,13 +1,16 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 
-import { IAudioPlayer } from 'components/AudioPlayer/types';
-import ControlButtons from 'components/ControlButtons';
-import Duration from 'components/Duration';
-import Volume from 'components/Volume';
-import VolumeControls from 'components/VolumeControls';
+import Button from 'components/atoms/Button';
+import ControlButtons from 'components/molecules/ControlButtons';
+import Duration from 'components/molecules/Duration';
+import VolumeBar from 'components/molecules/VolumeBar';
+import VolumeControls from 'components/molecules/VolumeControls';
 
-// TODO: Code Refactoring
-export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
+type AudioPlayerType = {
+    uploadedFile: File | null;
+};
+
+export default function AudioPlayer({ uploadedFile }: AudioPlayerType) {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const volumeRef = useRef<HTMLInputElement | null>(null);
     const durationRef = useRef<HTMLInputElement | null>(null);
@@ -15,14 +18,12 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
     const [mode, setMode] = useState('stop');
     const [show, setShow] = useState(false);
 
+    const [volume, setVolume] = useState(0.5);
+
     const [max, setMax] = useState(0);
     const [originalTime, setOriginalTime] = useState(0);
     const [currentTime, setCurrentTime] = useState('0:00');
     const [totalDuration, setTotalDuration] = useState('0:00');
-
-    const [volume, setVolume] = useState(0.5);
-
-    const onScreenClick = () => setShow((prev) => !prev);
 
     useEffect(() => {
         let timerId: NodeJS.Timeout;
@@ -32,7 +33,9 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
         return () => clearTimeout(timerId);
     }, [show]);
 
-    const onPlay = () => {
+    const handleScreenClick = () => setShow((prev) => !prev);
+
+    const handlePlay = () => {
         if (audioRef.current && uploadedFile) {
             if (!audioRef.current.src) {
                 const url: string = URL.createObjectURL(uploadedFile as File);
@@ -59,7 +62,7 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
     };
 
     // TODO: time formatter 함수 작성
-    const onTimeUpdate = (e: React.SyntheticEvent<EventTarget>) => {
+    const handleTimeUpdate = (e: React.SyntheticEvent<EventTarget>) => {
         const event = e.currentTarget as HTMLAudioElement;
         if (audioRef.current && !audioRef.current.paused && !audioRef.current.ended) {
             if (audioRef.current.duration && totalDuration === '0:00') {
@@ -76,9 +79,9 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
         }
     };
 
-    const onVolumeChange = (direction: string) => {
+    const handleVolumeChange = (direction: string) => {
         setShow(true);
-        if (audioRef.current && volumeRef.current) {
+        if (uploadedFile && audioRef.current && volumeRef.current) {
             audioRef.current!.pause();
 
             let newVolume = 0;
@@ -95,7 +98,7 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
         }
     };
 
-    const onTimeChange = (e: FormEvent<HTMLInputElement>) => {
+    const handleTimeChange = (e: FormEvent<HTMLInputElement>) => {
         audioRef.current!.pause();
 
         const currentValue = Number(e.currentTarget.value);
@@ -123,24 +126,23 @@ export default function AudioPlayer({ uploadedFile }: IAudioPlayer) {
         }
 
         setCurrentTime(`${minutes}:${seconds}`);
-
         audioRef.current!.currentTime = currentValue;
         audioRef.current!.play();
     };
 
     return (
         <div className="relative w-[300px] h-[500px] bg-black rounded-md p-5">
-            <VolumeControls onVolumeChange={onVolumeChange} />
+            <VolumeControls onVolumeChange={handleVolumeChange} />
             <div className="overflow-hidden relative w-full h-[150px] bg-blue-50 rounded-md border-2 p-2.5 border-black">
-                <div className="h-full" role="button" tabIndex={-1} onKeyDown={onScreenClick} onClick={onScreenClick}>
+                <Button className="w-full h-full" onClick={handleScreenClick}>
                     <p className="text-[12px] font-semibold font-mono">{uploadedFile?.name}</p>
-                </div>
+                </Button>
                 {uploadedFile?.name && !!originalTime && (
-                    <Duration ref={durationRef} currentTime={currentTime} max={max} totalDuration={totalDuration} duration={originalTime} onTimeChange={onTimeChange} />
+                    <Duration ref={durationRef} currentTime={currentTime} max={max} totalDuration={totalDuration} duration={originalTime} onTimeChange={handleTimeChange} />
                 )}
             </div>
-            {show && <Volume ref={volumeRef} volume={volume} />}
-            <ControlButtons ref={audioRef} onPlay={onPlay} onTimeUpdate={onTimeUpdate} />
+            {show && <VolumeBar ref={volumeRef} volume={volume} />}
+            <ControlButtons ref={audioRef} onPlay={handlePlay} onTimeUpdate={handleTimeUpdate} />
         </div>
     );
 }

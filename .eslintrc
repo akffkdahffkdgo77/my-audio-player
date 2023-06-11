@@ -1,19 +1,19 @@
 {
     "env": {
-        "node": true, // node 환경
-        "jest": true, // jest를 사용한다면 true
-        "browser": true, // document, window를 사용하려면 true
-        "es2021": true // ECMASCRIPT 버젼 설정
+        "node": true,
+        "jest": true,
+        "browser": true,
+        "es2021": true
     },
     "parser": "@typescript-eslint/parser",
     "extends": [
-        "react-app", // eslint-config-react-app
-        "airbnb", // eslint-config-airbnb
-        "prettier", // eslint-config-prettier, prettier와 충돌나는 ESLint 설정들 비활성화
+        "react-app",
+        "airbnb",
+        "prettier",
         "plugin:import/typescript",
-        "plugin:react/recommended", // eslint-plugin-react에서 추천하는 ESLint 설정
+        "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended", // eslint-plugin-prettier, eslint-config-prettier 설정 적용하려면 필수
+        "plugin:prettier/recommended",
         "plugin:react/jsx-runtime"
     ],
     "plugins": ["prettier", "@typescript-eslint"],
@@ -55,44 +55,22 @@
                 "groups": ["builtin", "external", "internal", ["parent", "sibling"], "index", "object", "type"],
                 "pathGroups": [
                     {
-                        "pattern": "react",
+                        "pattern": "{react*,react*/**}",
                         "group": "external",
                         "position": "before"
-                    },
-                    {
-                        "pattern": "hooks/**",
-                        "group": "internal",
-                        "position": "before"
-                    },
-                    {
-                        "pattern": "types/**",
-                        "group": "type"
                     }
                 ],
                 "pathGroupsExcludedImportTypes": ["react"],
                 "newlines-between": "always",
                 "alphabetize": {
-                    "order": "asc" /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
-                    "caseInsensitive": true /* ignore case. Options: [true, false] */
+                    "order": "asc",
+                    "caseInsensitive": true
                 }
             }
         ],
         "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
-        "import/no-extraneous-dependencies": "off",
-        "react/function-component-definition": "off",
-        "no-param-reassign": "off",
-        "react/forbid-prop-types": "off",
-        "react/jsx-no-useless-fragment": "off",
-        "no-alert": "off",
+        "react/require-default-props": "off",
         "react/jsx-props-no-spreading": "off",
-        "no-return-assign": "off",
-        "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
-        "no-shadow": "off",
-        "no-nested-ternary": "off",
-        "no-unneeded-ternary": "off",
-        "react/no-array-index-key": "off",
-        "prefer-promise-reject-errors": "off",
-        "global-require": "off",
         "@typescript-eslint/no-non-null-assertion": "off"
     }
 }
