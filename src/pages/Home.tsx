@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 
-import AudioPlayer from 'components/AudioPlayer';
-import UploadButton from 'components/UploadButton';
+import UploadButton from 'components/molecules/UploadButton';
+import AudioPlayer from 'components/organisms/AudioPlayer';
 
 export default function Home() {
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);

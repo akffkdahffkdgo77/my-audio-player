@@ -1,8 +1,10 @@
-import { forwardRef } from 'react';
+import React from 'react';
 
-import { PropsType } from 'components/Volume/types';
+type VolumeType = {
+    volume: number;
+};
 
-const Volume = forwardRef<HTMLInputElement, PropsType>(({ volume }, ref) => {
+const Volume = React.forwardRef<HTMLInputElement, VolumeType>(({ volume }, ref) => {
     return (
         <label htmlFor="volume" className="overflow-hidden w-[20px] h-[100px] absolute top-[45px] right-[30px] bottom-[45px] bg-blue-50">
             <div style={{ height: `calc(100% - ${Math.floor(volume * 100)}%)` }} className="z-50 h-0 w-[17px] bg-blue-50 absolute top-[-1px] right-0" />
