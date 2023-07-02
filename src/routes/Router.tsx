@@ -1,13 +1,21 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 
-import Home from 'pages/Home';
+import BaseLayout from '@/layout';
+import ErrorPage from '@pages/Error';
+import Home from '@pages/Home';
 
-export default function Router() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Home />} />
-            </Routes>
-        </BrowserRouter>
-    );
-}
+const router = createBrowserRouter([
+    {
+        path: '',
+        element: <BaseLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: '',
+                element: <Home />
+            }
+        ]
+    }
+]);
+
+export default router;

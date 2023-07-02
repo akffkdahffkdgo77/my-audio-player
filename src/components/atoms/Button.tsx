@@ -5,10 +5,17 @@ type ButtonType = React.HTMLAttributes<HTMLButtonElement> & {
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export default function Button({ children, onClick = () => {}, ...props }: ButtonType) {
+export default function Button({ children, onClick, ...rest }: ButtonType) {
     return (
-        <button {...props} type="button" onClick={onClick}>
+        <button
+            {...rest}
+            type="button"
+            onClick={(e) => {
+                if (onClick) {
+                    onClick(e);
+                }
+            }}
+        >
             {children}
         </button>
     );

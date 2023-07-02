@@ -1,22 +1,22 @@
 {
     "env": {
-        "node": true,
-        "jest": true,
-        "browser": true,
-        "es2021": true
+        "node": true, // node 환경
+        "jest": true, // jest를 사용한다면 true
+        "browser": true, // document, window를 사용하려면 true
+        "es2021": true // ECMASCRIPT 버젼 설정
     },
     "parser": "@typescript-eslint/parser",
     "extends": [
-        "react-app",
-        "airbnb",
-        "prettier",
+        "react-app", // eslint-config-react-app
+        "airbnb", // eslint-config-airbnb
+        "prettier", // eslint-config-prettier, prettier와 충돌나는 ESLint 설정들 비활성화
         "plugin:import/typescript",
-        "plugin:react/recommended",
+        "plugin:react/recommended", // eslint-plugin-react에서 추천하는 ESLint 설정
         "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended",
+        "plugin:prettier/recommended", // eslint-plugin-prettier, eslint-config-prettier 설정 적용하려면 필수
         "plugin:react/jsx-runtime"
     ],
-    "plugins": ["prettier", "@typescript-eslint"],
+    "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "import"],
     "parserOptions": {
         "ecmaVersion": 12,
         "sourceType": "module",
@@ -24,31 +24,24 @@
             "jsx": true
         }
     },
-    "ignorePatterns": ["node_modules/", "serviceWorker.ts", "setupTests.ts"],
     "settings": {
         "import/resolver": {
-            "node": {
-                "paths": ["src"],
-                "extensions": [".js", ".jsx", ".ts", ".tsx"]
-            }
+            "typescript": {}
         },
         "react": {
             "version": "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
         }
     },
     "rules": {
-        "prettier/prettier": "off",
-        "import/extensions": [
-            "error",
-            "ignorePackages",
-            {
-                "js": "never",
-                "jsx": "never",
-                "ts": "never",
-                "tsx": "never",
-                "": "never"
-            }
-        ],
+        "react/require-default-props": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "import/extensions": "off",
+        "no-nested-ternary": "off",
+        "no-restricted-exports": "off",
+        "react/jsx-props-no-spreading": "off",
+        "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": "off",
+        "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "import/order": [
             "error",
             {
@@ -58,19 +51,30 @@
                         "pattern": "{react*,react*/**}",
                         "group": "external",
                         "position": "before"
+                    },
+                    {
+                        "pattern": "@components/**",
+                        "group": "external",
+                        "position": "before"
+                    },
+                    {
+                        "pattern": "{@zustand/**,@utils/**,@styles/**,@heroicons/**,*.+(css|scss)}",
+                        "patternOptions": {
+                            "dot": true,
+                            "nocomment": true,
+                            "matchBase": true
+                        },
+                        "group": "object",
+                        "position": "after"
                     }
                 ],
                 "pathGroupsExcludedImportTypes": ["react"],
                 "newlines-between": "always",
                 "alphabetize": {
-                    "order": "asc",
-                    "caseInsensitive": true
+                    "order": "asc" /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
+                    "caseInsensitive": true /* ignore case. Options: [true, false] */
                 }
             }
-        ],
-        "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
-        "react/require-default-props": "off",
-        "react/jsx-props-no-spreading": "off",
-        "@typescript-eslint/no-non-null-assertion": "off"
+        ]
     }
 }

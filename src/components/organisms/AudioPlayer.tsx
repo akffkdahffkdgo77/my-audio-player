@@ -1,10 +1,10 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 
-import Button from 'components/atoms/Button';
-import ControlButtons from 'components/molecules/ControlButtons';
-import Duration from 'components/molecules/Duration';
-import VolumeBar from 'components/molecules/VolumeBar';
-import VolumeControls from 'components/molecules/VolumeControls';
+import Button from '@atoms/Button';
+import ControlButtons from '@molecules/ControlButtons';
+import Duration from '@molecules/Duration';
+import VolumeBar from '@molecules/VolumeBar';
+import VolumeControls from '@molecules/VolumeControls';
 
 type AudioPlayerType = {
     uploadedFile: File | null;
@@ -131,11 +131,11 @@ export default function AudioPlayer({ uploadedFile }: AudioPlayerType) {
     };
 
     return (
-        <div className="relative w-[300px] h-[500px] bg-black rounded-md p-5">
+        <div className="relative h-500 w-300 rounded-md bg-black p-20">
             <VolumeControls onVolumeChange={handleVolumeChange} />
-            <div className="overflow-hidden relative w-full h-[150px] bg-blue-50 rounded-md border-2 p-2.5 border-black">
-                <Button className="w-full h-full" onClick={handleScreenClick}>
-                    <p className="text-[12px] font-semibold font-mono">{uploadedFile?.name}</p>
+            <div className="relative h-150 w-full overflow-hidden rounded-md border-2 border-black bg-blue-50 p-10">
+                <Button className="h-full w-full" onClick={handleScreenClick}>
+                    <p className="animate-pulse font-mono text-12 font-semibold">{uploadedFile?.name}</p>
                 </Button>
                 {uploadedFile?.name && !!originalTime && (
                     <Duration ref={durationRef} currentTime={currentTime} max={max} totalDuration={totalDuration} duration={originalTime} onTimeChange={handleTimeChange} />

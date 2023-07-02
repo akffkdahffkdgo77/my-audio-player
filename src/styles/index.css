@@ -2,91 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-.controls input[type='range']::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 7px;
-    background: #000000;
-}
+@layer utilities {
+    .controls input[type='range']::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 7px;
+        background: #000000;
+    }
 
-.controls input[type='range']::-webkit-slider-thumb {
-    height: 15px;
-    width: 15px;
-    border-radius: 25px;
-    background: #000000;
-    border: 1px solid white;
-    -webkit-appearance: none;
-    margin-top: -5px;
-    cursor: pointer;
-}
+    .controls input[type='range']::-webkit-slider-thumb {
+        height: 15px;
+        width: 15px;
+        border-radius: 25px;
+        background: #000000;
+        border: 1px solid white;
+        -webkit-appearance: none;
+        margin-top: -5px;
+        cursor: pointer;
+    }
 
-.controls input[type='range']:focus::-webkit-slider-runnable-track {
-    border: none;
-    outline: none;
-}
+    .controls input[type='range']:focus::-webkit-slider-runnable-track {
+        border: none;
+        outline: none;
+    }
 
-.controls input[type='range']::-moz-range-track {
-    width: 100px;
-    height: 15px;
-    background: #000000;
-    border: none;
-}
+    .controls input[type='range']::-moz-range-track {
+        width: 100px;
+        height: 15px;
+        background: #000000;
+        border: none;
+    }
 
-.controls input[type='range']::-moz-range-thumb {
-    border: none;
-    height: 20px;
-    width: 5px;
-    border-radius: 0;
-    background: #eef6ff;
-}
+    .controls input[type='range']::-moz-range-thumb {
+        border: none;
+        height: 20px;
+        width: 5px;
+        border-radius: 0;
+        background: #eef6ff;
+    }
 
-/*hide the outline behind the border*/
-.controls input[type='range']:-moz-focusring {
-    outline: none;
-}
+    /*hide the outline behind the border*/
+    .controls input[type='range']:-moz-focusring {
+        outline: none;
+    }
 
-.controls input[type='range']:focus::-moz-range-track {
-    outline: none;
-}
+    .controls input[type='range']:focus::-moz-range-track {
+        outline: none;
+    }
 
-label > input[type='range']::-webkit-slider-runnable-track {
-    width: 100px;
-    height: 15px;
-    background: #000000;
-}
+    label > input[type='range']::-webkit-slider-runnable-track {
+        width: 100px;
+        height: 15px;
+        background: #000000;
+    }
 
-label > input[type='range']::-webkit-slider-thumb {
-    height: 20px;
-    width: 5px;
-    background: #eef6ff;
-    -webkit-appearance: none;
-}
+    label > input[type='range']::-webkit-slider-thumb {
+        height: 20px;
+        width: 5px;
+        background: #eef6ff;
+        -webkit-appearance: none;
+    }
 
-label > input[type='range']:focus::-webkit-slider-runnable-track {
-    border: none;
-    background: #000000;
-}
+    label > input[type='range']:focus::-webkit-slider-runnable-track {
+        border: none;
+        background: #000000;
+    }
 
-label > input[type='range']::-moz-range-track {
-    width: 100px;
-    height: 15px;
-    background: #000000;
-    border: none;
-}
+    label > input[type='range']::-moz-range-track {
+        width: 100px;
+        height: 15px;
+        background: #000000;
+        border: none;
+    }
 
-label > input[type='range']::-moz-range-thumb {
-    border: none;
-    height: 20px;
-    width: 5px;
-    border-radius: 0;
-    background: #eef6ff;
-}
+    label > input[type='range']::-moz-range-thumb {
+        border: none;
+        height: 20px;
+        width: 5px;
+        border-radius: 0;
+        background: #eef6ff;
+    }
 
-/*hide the outline behind the border*/
-label > input[type='range']:-moz-focusring {
-    outline: 1px solid #000000;
-    outline-offset: -1px;
-}
+    /*hide the outline behind the border*/
+    label > input[type='range']:-moz-focusring {
+        outline: 1px solid #000000;
+        outline-offset: -1px;
+    }
 
-label > input[type='range']:focus::-moz-range-track {
-    background: #000000;
+    label > input[type='range']:focus::-moz-range-track {
+        background: #000000;
+    }
 }
