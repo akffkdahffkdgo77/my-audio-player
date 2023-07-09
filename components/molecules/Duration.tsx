@@ -1,8 +1,8 @@
 import React from 'react';
 
-import tw from 'twin.macro';
+import { FlexBox, Typography } from '@atoms';
 
-import { FlexBox, Typography } from '../atoms';
+import tw from 'twin.macro';
 
 type DurationType = {
     currentTime: string;

@@ -1,11 +1,9 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 
+import { FlexBox, Button } from '@atoms';
+
 import tw from 'twin.macro';
-
-import Button from '@atoms/Button';
-
-import { FlexBox } from '../atoms';
 
 import { PlayIcon, PauseIcon, ForwardIcon, BackwardIcon } from '@heroicons/react/24/solid';
 

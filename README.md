@@ -1,6 +1,6 @@
 <img width="500" alt="스크린샷 2023-06-11 오후 4 32 28" src="https://github.com/akffkdahffkdgo77/my-audio-player/assets/52883505/532dc43c-c462-48bf-9923-f97e59e1fa18">
 
-***
+---
 
 <div>
   <a href="https://github.com/namiein/weekly-clone-coding">
@@ -20,21 +20,22 @@
  
 ### 🗒️ Project Description
 
-__*Clone Coding MP3 Player*__
+**_Clone Coding MP3 Player_**
 
 ### 😎 Project Features
 
-- [x] File Upload   
-- [x] Music Player   
-   - [x] Currently Support 1 Music   
+-   [x] File Upload
+-   [x] Music Player
+    -   [x] Currently Support 1 Music
 
 ### 🔮 v1.0.1 (TO-BE)
 
-- [ ] Multi Files   
-- [ ] Menu   
-   - [ ] Show Music Info   
-    
+-   [ ] Multi Files
+-   [ ] Menu
+    -   [ ] Show Music Info
+
 ### 📁 Atomic Design
+
 ```
 atoms - Independent HTML Tag (button)
 molecules - Relatively Simple Components, Single Responsibility (Control Buttons, Duration, Upload Button, Volume Bar, Volume Controls)

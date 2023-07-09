@@ -5,7 +5,7 @@ const zIndex = { ...Array.from(Array(1001)).map((_, i) => `${i}`) };
 const dimension = { ...Array.from(Array(2001)).map((_, i) => `${i}px`) };
 
 module.exports = {
-    content: ['./src/**/*.{js,jsx,ts,tsx}'],
+    content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
     theme: {
         extend: {
             width: dimension,
