@@ -1,3 +1,5 @@
+'use client';
+
 import { FormEvent, useEffect, useRef, useState } from 'react';
 
 import Button from '@atoms/Button';
