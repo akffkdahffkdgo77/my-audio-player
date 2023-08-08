@@ -44,10 +44,6 @@
   </tbody>
 </table>
 
-## Demo
-
-_Coming Soon...!_
-
 ## Project History
 
 ### 😎 v1.0
@@ -60,7 +56,11 @@ _Coming Soon...!_
 -   [x] 1차 코드 리팩토링
 -   [x] NextJS Migration
 
-### 🔮 v1.2 (가을 업데이트)
+### 🔮 v1.1 (여름 / 가을 업데이트)
 
 -   [ ] 2차 코드 리팩토링
 -   [ ] UI 업데이트
+
+## Demo
+
+_Coming Soon...!_
