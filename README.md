@@ -3,7 +3,7 @@
   <tbody>
     <tr>
       <th align="left" width="200">Project Description</th>
-      <td><strong><i>Clone Coding MP3 Player</i></strong></td>
+      <td><strong><i>나만의 🎵🎧</i></strong></td>
     </tr>
     <tr>
       <th align="left" width="200">Project Group</th>
